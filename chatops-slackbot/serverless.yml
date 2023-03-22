@@ -1,0 +1,18 @@
+service: chatops-slackbot
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  memorySize: 256
+  region: eu-west-2
+  runtime: python3.9
+  stage: ${opt:stage, 'dev'}
+  timeout: 30
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
